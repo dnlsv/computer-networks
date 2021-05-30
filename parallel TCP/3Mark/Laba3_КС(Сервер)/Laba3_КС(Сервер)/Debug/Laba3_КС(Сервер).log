@@ -1,0 +1,8 @@
+﻿  Source.cpp
+D:\My\University\КС\CSlaba3\3Mark\Laba3_КС(Сервер)\Laba3_КС(Сервер)\Source.cpp(209,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\My\University\КС\CSlaba3\3Mark\Laba3_КС(Сервер)\Laba3_КС(Сервер)\Source.cpp(236,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\My\University\КС\CSlaba3\3Mark\Laba3_КС(Сервер)\Laba3_КС(Сервер)\Source.cpp(245,33): warning C4805: !=: небезопасное смешение типа "bool" и типа "int" в операции
+D:\My\University\КС\CSlaba3\3Mark\Laba3_КС(Сервер)\Laba3_КС(Сервер)\Source.cpp(269,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\My\University\КС\CSlaba3\3Mark\Laba3_КС(Сервер)\Laba3_КС(Сервер)\Source.cpp(272,9): warning C4018: <: несоответствие типов со знаком и без знака
+D:\My\University\КС\CSlaba3\3Mark\Laba3_КС(Сервер)\Laba3_КС(Сервер)\Source.cpp(281,51): warning C4805: ==: небезопасное смешение типа "bool" и типа "int" в операции
+  Laba3_КС(Сервер).vcxproj -> D:\My\University\КС\CSlaba3\3Mark\Laba3_КС(Сервер)\Debug\Laba3_КС(Сервер).exe
