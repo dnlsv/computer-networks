@@ -1,2 +1,3 @@
-*/.vs/
-*/Debug/
+# MS Visual Studio #
+.vs
+Debug/
