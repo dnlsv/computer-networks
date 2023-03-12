@@ -10,46 +10,46 @@
 
 using namespace std;
 
-int main() 
+int main()
 {
-	setlocale(LC_ALL, "rus");
-	char buf[100], b[100]; 
-	WORD wVersionRequested; 
-	WSADATA wsaData;
-	int err;
-	wVersionRequested = MAKEWORD(2, 2); 
-	err = WSAStartup(wVersionRequested, &wsaData);
-	if (err != 0) { return 0; }
+    setlocale(LC_ALL, ".UTF8");
+    char buf[100], b[100];
+    WORD wVersionRequested;
+    WSADATA wsaData;
+    int err;
+    wVersionRequested = MAKEWORD(2, 2);
+    err = WSAStartup(wVersionRequested, &wsaData);
+    if (err != 0) { return 0; }
 
-	SOCKET s;
-	s = socket(AF_INET, SOCK_DGRAM, 0);
-	sockaddr_in add; 
-	add.sin_family = AF_INET; 
-	add.sin_port = htons(1024);
+    SOCKET s;
+    s = socket(AF_INET, SOCK_DGRAM, 0);
+    sockaddr_in add;
+    add.sin_family = AF_INET;
+    add.sin_port = htons(1024);
 
-	add.sin_addr.s_addr = inet_addr("127.0.0.1");
+    add.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-	int t, flag;
+    int t, flag;
 
-	while (true)
-	{
-		t = sizeof(add);
-		cout << "Ââåäèòå ñòðîêó" << endl;
-		cin.getline(buf, 100, '\n');
+    while (true)
+    {
+        t = sizeof(add);
+        cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ‚Ñ€Ð¾ÐºÑƒ" << endl;
+        cin.getline(buf, 100, '\n');
 
-		sendto(s, buf, lstrlen(buf), 0, (struct sockaddr*) & add, t);
-		int rv = recvfrom(s, b, sizeof(b), 0, (struct sockaddr*) & add, &t);
-		b[rv] = 0;
-		cout << b << endl;
+        sendto(s, buf, lstrlen(buf), 0, (struct sockaddr*)&add, t);
+        int rv = recvfrom(s, b, sizeof(b), 0, (struct sockaddr*)&add, &t);
+        b[rv] = 0;
+        cout << b << endl;
 
-		cout << endl << "Åùå ðàç?" << endl << "1 - Äà" << endl << "0 - Íåò" << endl;
-		cin >> flag;
-		if (flag == 0)
-			break;
-		cin.ignore();
-	}
-	closesocket(s);
+        cout << endl << "Ð•Ñ‰Ðµ Ñ€Ð°Ð·?" << endl << "1 - Ð”Ð°" << endl << "0 - ÐÐµÑ‚" << endl;
+        cin >> flag;
+        if (flag == 0)
+            break;
+        cin.ignore();
+    }
+    closesocket(s);
 
-	WSACleanup();
-	return 0;
+    WSACleanup();
+    return 0;
 }

@@ -196,6 +196,3 @@ int main()
 	delete[]em;
 	return 0;
 }
-
-
-

@@ -11,53 +11,53 @@ using namespace std;
 
 int main()
 {
-	setlocale(LC_ALL, "rus");
+    setlocale(LC_ALL, ".UTF8");
 
-	WORD wVersionRequested;
-	WSADATA wsaData;
-	wVersionRequested = MAKEWORD(2, 2);
-	if (FAILED(WSAStartup(wVersionRequested, &wsaData)))
-	{
-		int error = WSAGetLastError();
-		cout << "Error code " << error << endl;
-		exit(-1);
-	}
+    WORD wVersionRequested;
+    WSADATA wsaData;
+    wVersionRequested = MAKEWORD(2, 2);
+    if (FAILED(WSAStartup(wVersionRequested, &wsaData)))
+    {
+        int error = WSAGetLastError();
+        cout << "Error code " << error << endl;
+        exit(-1);
+    }
 
-	SOCKET s = socket(AF_INET, SOCK_STREAM, 0);
-	if (s == INVALID_SOCKET)
-	{
-		int error = WSAGetLastError();
-		cout << "Error code " << error << endl;
-		exit(-1);
-	}
+    SOCKET s = socket(AF_INET, SOCK_STREAM, 0);
+    if (s == INVALID_SOCKET)
+    {
+        int error = WSAGetLastError();
+        cout << "Error code " << error << endl;
+        exit(-1);
+    }
 
-	struct sockaddr_in peer;
-	peer.sin_family = AF_INET;
-	peer.sin_port = htons(1280);
-	peer.sin_addr.s_addr = inet_addr("127.0.0.1");
+    struct sockaddr_in peer;
+    peer.sin_family = AF_INET;
+    peer.sin_port = htons(1280);
+    peer.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-	if (SOCKET_ERROR == connect(s, (struct sockaddr*) & peer, sizeof(peer)))
-	{
-		int error = WSAGetLastError();
-		cout << "Error code " << error << endl;
-		exit(-1);
-	}
+    if (SOCKET_ERROR == connect(s, (struct sockaddr*)&peer, sizeof(peer)))
+    {
+        int error = WSAGetLastError();
+        cout << "Error code " << error << endl;
+        exit(-1);
+    }
 
-	char str[255], buf[255];
-	while (1)
-	{
-		system("cls");
-		cout << "Ââåäèòå ñòðîêó." << endl;
-		cin.getline(str, 100, '\n');
-		send(s, str, sizeof(str), 0);
-		if (recv(s, buf, sizeof(buf), 0) != 0)
-			cout << endl << buf << endl;
-		cout << "\nÏðîäîëæèòü? \n\n1 - Äà\n0 - Çàâåðøèòü" << endl;
-		if (_getch() == '0')
-			break;
-	}
+    char str[255], buf[255];
+    while (1)
+    {
+        system("cls");
+        cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ‚Ñ€Ð¾ÐºÑƒ." << endl;
+        cin.getline(str, 100, '\n');
+        send(s, str, sizeof(str), 0);
+        if (recv(s, buf, sizeof(buf), 0) != 0)
+            cout << endl << buf << endl;
+        cout << "\nÐŸÑ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑŒ? \n\n1 - Ð”Ð°\n0 - Ð—Ð°Ð²ÐµÑ€ÑˆÐ¸Ñ‚ÑŒ" << endl;
+        if (_getch() == '0')
+            break;
+    }
 
-	closesocket(s);
-	WSACleanup();
-	return 0;
+    closesocket(s);
+    WSACleanup();
+    return 0;
 }

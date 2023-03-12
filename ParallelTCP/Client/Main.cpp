@@ -11,181 +11,181 @@ using namespace std;
 
 int main()
 {
-	setlocale(LC_ALL, "ru");
-	WORD wVersionRequested; 
-	WSADATA wsaData;
-	int err;
-	wVersionRequested = MAKEWORD(2, 2); 
-	err = WSAStartup(wVersionRequested, &wsaData); 
-	if (err != 0) 
-		return -1;
+    setlocale(LC_ALL, ".UTF8");
+    WORD wVersionRequested;
+    WSADATA wsaData;
+    int err;
+    wVersionRequested = MAKEWORD(2, 2);
+    err = WSAStartup(wVersionRequested, &wsaData);
+    if (err != 0)
+        return -1;
 
-	char buf[100], action[2], numh[5];
-	int act, nur = 0;
-	string book, author, publ, str;
-	int year, page, number;
+    char buf[100], action[2], numh[5];
+    int act, nur = 0;
+    string book, author, publ, str;
+    int year, page, number;
 
-	while (true)
-	{
-		SOCKET s = socket(AF_INET, SOCK_STREAM, 0);
-		sockaddr_in dest_addr;
-		dest_addr.sin_family = AF_INET;
-		dest_addr.sin_port = htons(1280);
-		dest_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-		connect(s, (sockaddr*)&dest_addr, sizeof(dest_addr));
+    while (true)
+    {
+        SOCKET s = socket(AF_INET, SOCK_STREAM, 0);
+        sockaddr_in dest_addr;
+        dest_addr.sin_family = AF_INET;
+        dest_addr.sin_port = htons(1280);
+        dest_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+        connect(s, (sockaddr*)&dest_addr, sizeof(dest_addr));
 
-		cout << "1 - Äîáàâëåíèå" << endl << "2 - Ïðîñìîòð" << endl << "3 - Ðåäàêòèðîâàíèå"
-			<< endl << "4 - Óäàëåíèå" << endl << "5 - Çàäàíèå " << endl;
-		cin >> act;
-		snprintf(action, sizeof(action), "%d", act);
-		send(s, action, sizeof(action), 0);
+        cout << "1 - Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ" << endl << "2 - ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€" << endl << "3 - Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ"
+            << endl << "4 - Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ" << endl << "5 - Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ " << endl;
+        cin >> act;
+        snprintf(action, sizeof(action), "%d", act);
+        send(s, action, sizeof(action), 0);
 
-		switch (act)
-		{
-		case 1:
-			nur++;
+        switch (act)
+        {
+        case 1:
+            nur++;
 
-			cout << "Ââåäèòå\t" << endl << "Íàçâàíèå êíèãè" << endl;
-			cin >> book;
-			for (unsigned int i = 0; i < book.size(); i++)
-				buf[i] = book[i];
-			buf[book.size()] = '\0';
-			send(s, buf, sizeof(buf), 0);
+            cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ\t" << endl << "ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ ÐºÐ½Ð¸Ð³Ð¸" << endl;
+            cin >> book;
+            for (unsigned int i = 0; i < book.size(); i++)
+                buf[i] = book[i];
+            buf[book.size()] = '\0';
+            send(s, buf, sizeof(buf), 0);
 
-			cout << "Èìÿ àâòîðà" << endl;
-			cin >> author;
-			for (unsigned int i = 0; i < author.size(); i++)
-				buf[i] = author[i];
-			buf[author.size()] = '\0';
-			send(s, buf, sizeof(buf), 0);
+            cout << "Ð˜Ð¼Ñ Ð°Ð²Ñ‚Ð¾Ñ€Ð°" << endl;
+            cin >> author;
+            for (unsigned int i = 0; i < author.size(); i++)
+                buf[i] = author[i];
+            buf[author.size()] = '\0';
+            send(s, buf, sizeof(buf), 0);
 
-			cout << "Ãîä èçäàíèÿ" << endl;
-			cin >> year;
-			str = to_string(year);
-			for (unsigned int i = 0; i < str.size(); i++)
-				buf[i] = str[i];
-			buf[str.size()] = '\0';
-			send(s, buf, sizeof(buf), 0);
+            cout << "Ð“Ð¾Ð´ Ð¸Ð·Ð´Ð°Ð½Ð¸Ñ" << endl;
+            cin >> year;
+            str = to_string(year);
+            for (unsigned int i = 0; i < str.size(); i++)
+                buf[i] = str[i];
+            buf[str.size()] = '\0';
+            send(s, buf, sizeof(buf), 0);
 
-			cout << "Èçäàòåëüñòâî" << endl;
-			cin >> publ;
-			for (unsigned int i = 0; i < publ.size(); i++)
-				buf[i] = publ[i];
-			buf[publ.size()] = '\0';
-			send(s, buf, sizeof(buf), 0);
+            cout << "Ð˜Ð·Ð´Ð°Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð¾" << endl;
+            cin >> publ;
+            for (unsigned int i = 0; i < publ.size(); i++)
+                buf[i] = publ[i];
+            buf[publ.size()] = '\0';
+            send(s, buf, sizeof(buf), 0);
 
-			cout << "Êîëè÷åñòâî ñðàíèö" << endl;
-			cin >> page;
-			str = to_string(page);
-			for (unsigned int i = 0; i < str.size(); i++)
-				buf[i] = str[i];
-			buf[str.size()] = '\0';
-			send(s, buf, sizeof(buf), 0);
+            cout << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÑ€Ð°Ð½Ð¸Ñ†" << endl;
+            cin >> page;
+            str = to_string(page);
+            for (unsigned int i = 0; i < str.size(); i++)
+                buf[i] = str[i];
+            buf[str.size()] = '\0';
+            send(s, buf, sizeof(buf), 0);
 
-			cout << "Ðåãèñòðàöèîííûé íîìåð êíèãè" << endl;
-			cin >> number;
-			str = to_string(number);
-			for (unsigned int i = 0; i < str.size(); i++)
-				buf[i] = str[i];
-			buf[str.size()] = '\0';
-			send(s, buf, sizeof(buf), 0);
-			break;
-		case 2:
-			cout << endl;
-			for (int i = 0; i < nur; i++)
-			{
-				recv(s, buf, sizeof(buf), 0);
-				cout << i + 1 << ". " << buf << endl;
-			}
-			cout << endl;
-			break;
-		case 3:
-			cout << endl;
-			for (int i = 0; i < nur; i++)
-			{
-				recv(s, buf, sizeof(buf), 0);
-				cout << i + 1 << ". " << buf << endl;
-			}
-			cout << endl;
-			cout << "Ââåäèòå íîìåð ðåäàêòèðóåìîé êíèãè: ";
-			cin >> numh;
-			send(s, numh, strlen(numh) + 1, 0);
+            cout << "Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ð¹ Ð½Ð¾Ð¼ÐµÑ€ ÐºÐ½Ð¸Ð³Ð¸" << endl;
+            cin >> number;
+            str = to_string(number);
+            for (unsigned int i = 0; i < str.size(); i++)
+                buf[i] = str[i];
+            buf[str.size()] = '\0';
+            send(s, buf, sizeof(buf), 0);
+            break;
+        case 2:
+            cout << endl;
+            for (int i = 0; i < nur; i++)
+            {
+                recv(s, buf, sizeof(buf), 0);
+                cout << i + 1 << ". " << buf << endl;
+            }
+            cout << endl;
+            break;
+        case 3:
+            cout << endl;
+            for (int i = 0; i < nur; i++)
+            {
+                recv(s, buf, sizeof(buf), 0);
+                cout << i + 1 << ". " << buf << endl;
+            }
+            cout << endl;
+            cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€ÑƒÐµÐ¼Ð¾Ð¹ ÐºÐ½Ð¸Ð³Ð¸: ";
+            cin >> numh;
+            send(s, numh, strlen(numh) + 1, 0);
 
-			cout << "Êàêèå äàííûå âû õîòèòå èçìåíèòü?" << endl << "1 - Íàçâàíèå" << endl << "2 - Àâòîðà" << endl
-				<< "3 - Ãîä èçäàíèÿ" << endl << "4 - Èçäàòåëüñòâî" << endl << "5 - Êîëè÷åñòâî ñòðàíèö" << endl
-				<< "6 - Ðåãèñòðàöèîííûé íîìåð" << endl;
-			cin >> act;
+            cout << "ÐšÐ°ÐºÐ¸Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð²Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ?" << endl << "1 - ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ" << endl << "2 - ÐÐ²Ñ‚Ð¾Ñ€Ð°" << endl
+                << "3 - Ð“Ð¾Ð´ Ð¸Ð·Ð´Ð°Ð½Ð¸Ñ" << endl << "4 - Ð˜Ð·Ð´Ð°Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð¾" << endl << "5 - ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†" << endl
+                << "6 - Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ð¹ Ð½Ð¾Ð¼ÐµÑ€" << endl;
+            cin >> act;
 
-			snprintf(action, sizeof(action), "%d", act);
-			act = action[0];
-			send(s, action, sizeof(action), 0);
-			switch (act)
-			{
-			case '1':
-				cout << "Íîâîå íàçâàíèå: ";
-				cin >> buf;
-				send(s, buf, strlen(buf) + 1, 0);
-				break;
-			case '2':
-				cout << "Íîâûé àâòîð: ";
-				cin >> buf;
-				send(s, buf, strlen(buf) + 1, 0);
-				break;
-			case '3':
-				cout << "Íîâûé ãîä èçäàíèÿ: ";
-				cin >> buf;
-				send(s, buf, strlen(buf) + 1, 0);
-				break;
-			case '4':
-				cout << "Íîâîå èçäàòåëüñòâî: ";
-				cin >> buf;
-				send(s, buf, strlen(buf) + 1, 0);
-				break;
-			case '5':
-				cout << "Íîâîå êîëèñåñòâî ñòðàíèö: ";
-				cin >> buf;
-				send(s, buf, strlen(buf) + 1, 0);
-				break;
-			case '6':
-				cout << "Íîâûé ðåãèñòðàöèîííûé íîìåð: ";
-				cin >> buf;
-				send(s, buf, strlen(buf) + 1, 0);
-				break;
-			}
-			break;
-		case 4:
-			cout << endl;
-			for (int i = 0; i < nur; i++)
-			{
-				recv(s, buf, sizeof(buf), 0);
-				cout << i + 1 << ". " << buf << endl;
-			}
-			cout << endl;
-			cout << "Ââåäèòå íîìåð óäàëÿåìîé êíèãè: ";
-			cin >> numh;
-			send(s, numh, strlen(numh) + 1, 0);
-			nur--;
-			break;
-		case 5:
-			cout << "Ââåäèòå ôàìèëèþ àâòîðà: ";
-			cin >> numh;
-			send(s, numh, strlen(numh) + 1, 0);
+            snprintf(action, sizeof(action), "%d", act);
+            act = action[0];
+            send(s, action, sizeof(action), 0);
+            switch (act)
+            {
+            case '1':
+                cout << "ÐÐ¾Ð²Ð¾Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ: ";
+                cin >> buf;
+                send(s, buf, strlen(buf) + 1, 0);
+                break;
+            case '2':
+                cout << "ÐÐ¾Ð²Ñ‹Ð¹ Ð°Ð²Ñ‚Ð¾Ñ€: ";
+                cin >> buf;
+                send(s, buf, strlen(buf) + 1, 0);
+                break;
+            case '3':
+                cout << "ÐÐ¾Ð²Ñ‹Ð¹ Ð³Ð¾Ð´ Ð¸Ð·Ð´Ð°Ð½Ð¸Ñ: ";
+                cin >> buf;
+                send(s, buf, strlen(buf) + 1, 0);
+                break;
+            case '4':
+                cout << "ÐÐ¾Ð²Ð¾Ðµ Ð¸Ð·Ð´Ð°Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð¾: ";
+                cin >> buf;
+                send(s, buf, strlen(buf) + 1, 0);
+                break;
+            case '5':
+                cout << "ÐÐ¾Ð²Ð¾Ðµ ÐºÐ¾Ð»Ð¸ÑÐµÑÑ‚Ð²Ð¾ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†: ";
+                cin >> buf;
+                send(s, buf, strlen(buf) + 1, 0);
+                break;
+            case '6':
+                cout << "ÐÐ¾Ð²Ñ‹Ð¹ Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ð¹ Ð½Ð¾Ð¼ÐµÑ€: ";
+                cin >> buf;
+                send(s, buf, strlen(buf) + 1, 0);
+                break;
+            }
+            break;
+        case 4:
+            cout << endl;
+            for (int i = 0; i < nur; i++)
+            {
+                recv(s, buf, sizeof(buf), 0);
+                cout << i + 1 << ". " << buf << endl;
+            }
+            cout << endl;
+            cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð¾Ð¹ ÐºÐ½Ð¸Ð³Ð¸: ";
+            cin >> numh;
+            send(s, numh, strlen(numh) + 1, 0);
+            nur--;
+            break;
+        case 5:
+            cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ„Ð°Ð¼Ð¸Ð»Ð¸ÑŽ Ð°Ð²Ñ‚Ð¾Ñ€Ð°: ";
+            cin >> numh;
+            send(s, numh, strlen(numh) + 1, 0);
 
-			recv(s, buf, sizeof(buf), 0);
-			cout << buf << endl;
-			int p;
-			p = atoi(buf);
-			cout << "Ïîëó÷åííàÿ èíôîðìàöèÿ: " << endl << endl;
-			for (int i = 0; i < p; i++)
-			{
-				recv(s, buf, sizeof(buf), 0);
-				cout << buf << endl;
-			}
-			cout << endl;
-			break;
-		}
-		closesocket(s);		
-	}
-	WSACleanup();
-	return 0;
+            recv(s, buf, sizeof(buf), 0);
+            cout << buf << endl;
+            int p;
+            p = atoi(buf);
+            cout << "ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð½Ð°Ñ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ: " << endl << endl;
+            for (int i = 0; i < p; i++)
+            {
+                recv(s, buf, sizeof(buf), 0);
+                cout << buf << endl;
+            }
+            cout << endl;
+            break;
+        }
+        closesocket(s);
+    }
+    WSACleanup();
+    return 0;
 }
